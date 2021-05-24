@@ -2,8 +2,8 @@
  import axios from 'axios'
  import { isEmpty, isEqual } from 'lodash/lang'
 
-const API_URL = 'http://localhost:8020/api'
-// const API_URL = 'http://cra.megastudy.net:8080/api'
+//const API_URL = 'http://localhost:8020/api'
+const API_URL = 'http://cra.megastudy.net:8080/api'
 
  export const getUrl = (urlName) => `${API_URL}/${urlName}`
  export const getRestUrl = (urlName, urlParam) => `${API_URL}/${urlName}/${urlParam}`
