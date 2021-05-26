@@ -2,7 +2,7 @@
  import axios from 'axios'
  import { isEmpty, isEqual } from 'lodash/lang'
 
-//const API_URL = 'http://localhost:8020/api'
+// const API_URL = 'http://localhost:8020/api'
 const API_URL = 'http://cra.megastudy.net:8080/api'
 
  export const getUrl = (urlName) => `${API_URL}/${urlName}`
@@ -15,7 +15,6 @@ const API_URL = 'http://cra.megastudy.net:8080/api'
       'Content-Type': 'application/json',
     },
   });
-
 
 const getRestApi = name => {
     return (
@@ -54,7 +53,7 @@ export const hasApiServiceError = result => {
 }
 
 export const getTeamSugi = () => {
-    return getRestApi('TeamSugi/ReadAll')
+    return getRestApi('TeamSugi')
 }
 
 export const deleteTeamSugi = Id => {

@@ -122,7 +122,7 @@ class TeamSugiContainer extends Component {
                 if (hasError.error) {
                     alert("서버에서 오류가 발생되었습니다.");
                 } else {
-                    const sugiList = responseJson.sugiList.map((sugiItem, index) => {
+                    const sugiList = responseJson.sugiList.reverse().map((sugiItem, index) => {
                         
                         const code_name = sugiItem.s_CODENAME;
                         const s_name = sugiItem.s_NAME;
