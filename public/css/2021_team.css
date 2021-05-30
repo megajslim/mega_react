@@ -88,7 +88,7 @@
 .div_con2 ul {padding:50px 50px 0;}
 .div_con2 ul li {border-bottom:1px solid #ccc; padding-bottom:90px; overflow:hidden;}
 .div_con2 ul li.last {border-bottom:none; padding-bottom:80px;}
-.div_con2 ul li .title_wrap {position:absolute; width:230px;}
+.div_con2 ul li .title_wrap {position:absolute; width:230px; margin-top: 20px;}
 .div_con2 ul li .title_wrap img {position:absolute; left:-38px; top:-12px;}
 .div_con2 ul li .title {padding-left:230px;}
 .div_con2 ul li .team_contents {padding-left:268px; font-size:16px; line-height:29px; color:#333; margin-top:20px; word-break:keep-all;}

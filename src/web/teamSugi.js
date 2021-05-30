@@ -4,17 +4,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField'
+import TextField from '@material-ui/core/TextField';
+import SvgIcon from '@material-ui/icons/Edit';
 
 class TeamSugi extends Component {
-    
+ 
     handleDelete = (seq) =>{
         const { deleteItem } = this.props
         deleteItem(seq)
     }
     renderList = () => {
         const { sugiList } = this.props
-        const {handleDelete} = this
+        const {handleDelete,handleChange} = this
         if(sugiList){
             return(
                 <Fragment>
@@ -23,18 +24,39 @@ class TeamSugi extends Component {
                         return (
                             <div key={index}>
                                  <ul className="list_wrap">
-                                    <li id="liNm157">
+                                    <li style ={{width:'100%'}}>
                                         <div className="title_wrap">    
                                             <p>{item.s_name}</p>
                                             <p>{item.s_univ} {item.s_major} 합격</p>
                                             <p>{item.code_name}</p>
                                         </div>
-                                        <p className="team_contents">
-                                            {item.s_content}
-                                        </p>
-                                        <div style={{textAlign:'right'}}>
+                                        <TextField
+                                        id={item.s_seq + index+ "_field"}
+                                        key={index+ "_field"}
+                                        multiline
+                                        margin="normal"
+                                        variant="outlined" 
+                                        value = {item.s_content }
+                                        onChange={ (e) => {
+                                            let values = sugiList;
+                                            values[index].s_content = e.target.value;
+                                            this.setState({ 
+                                                values
+                                            });
+                                            console.log(values); 
+                                        }}
+                                        
+                                        style ={{ paddingLeft:'200px', width:'75%',fontSize:'16px', lineHeight:'29px', marginTop:'20px', wordBreak:'keep-all'}} />
+                                        <p style={{textAlign:'right', marginRight:'10px'}}>
                                             <Button
-                                                id={item.s_seq}
+                                                variant="contained"
+                                                startIcon={<SvgIcon />}
+                                                onClick={handleDelete.bind(this, item.s_seq)}
+                                                style={{marginRight:'10px'}}
+                                            >
+                                                Edit
+                                            </Button>
+                                            <Button
                                                 variant="contained"
                                                 color="secondary"
                                                 startIcon={<DeleteIcon />}
@@ -42,7 +64,7 @@ class TeamSugi extends Component {
                                             >
                                                 Delete
                                             </Button>
-                                        </div>
+                                        </p>
                                     </li>
                                 </ul>
                             </div> 

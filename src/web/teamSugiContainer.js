@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators  } from 'redux'
 import { ActionTypes, teamSugiActions } from '../modules'
 import TeamSugi  from '../web/teamSugi' 
-import { isUndefined } from 'lodash/lang'
+import { isUndefined, isEqual } from 'lodash/lang'
 import {hasApiServiceError} from '../utils/api'
 
 class TeamSugiContainer extends Component {
@@ -34,6 +34,10 @@ class TeamSugiContainer extends Component {
         })
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState)
+    }
+
     deleteItem = (seq) => {
          if(window.confirm("삭제하시겠습니까?")){
             this.setDeleteSugi(seq);
@@ -55,6 +59,7 @@ class TeamSugiContainer extends Component {
             s_MAINYN : "Y",
             s_YEAR : "2020"
         }
+        console.log(params)
         try{
             const apiService = Actions.saveSugi(params)
             const response = await apiService
