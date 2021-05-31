@@ -6,6 +6,7 @@ const ActionTypes = {
         TeamSugiInfo: `${API}TEAMSUGIINFO`,
         DeleteSufi:    `${API}DELETESUGI`,
         SaveSugi : `${API}SAVESUGI`,
+        UpdateSugi : `${API}UPDATESUGI`,
     }
 }
 

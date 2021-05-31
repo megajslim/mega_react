@@ -2,8 +2,8 @@
  import axios from 'axios'
  import { isEmpty, isEqual } from 'lodash/lang'
 
-// const API_URL = 'http://localhost:8020/api'
-const API_URL = 'http://cra.megastudy.net:8080/api'
+const API_URL = 'http://localhost:8020/api'
+// const API_URL = 'http://cra.megastudy.net:8080/api'
 
  export const getUrl = (urlName) => `${API_URL}/${urlName}`
  export const getRestUrl = (urlName, urlParam) => `${API_URL}/${urlName}/${urlParam}`
@@ -37,6 +37,14 @@ const postRestApi = (name, params) => {
     )
 }
 
+const putRestApi = (name, params) => {
+    assign(params)
+    return (
+        instance.put(getUrl(name), params, timeout).catch((error) => {
+        })
+    )
+}
+
 //요청한 API 결과에 오류를 가지고 있는지
 export const hasApiServiceError = result => {
     if (isEmpty(result)) {
@@ -64,3 +72,6 @@ export const saveTeamSugi = params =>{
     return postRestApi('TeamSugi/Create', params)
 }
 
+export const udpateTeamSugi = params =>{
+    return putRestApi('TeamSugi/Update', params)
+}

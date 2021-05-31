@@ -34,16 +34,22 @@ class TeamSugiContainer extends Component {
         })
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState)
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('nextProps___'+nextProps);
+    //     console.log('nextProps___'+nextState);
+    //     return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState)
+    // }
 
     deleteItem = (seq) => {
          if(window.confirm("삭제하시겠습니까?")){
             this.setDeleteSugi(seq);
          }
     }
-
+    updateItem =(seq, content) => {
+        if(window.confirm("수정하시겠습니까?")){
+            this.setUpdateSugi(seq, content);
+         }
+    }
     saveItem = async() => {
         const { Actions } = this.props
         const { name, univ, major, code_name, title, content } = this.state
@@ -111,6 +117,37 @@ class TeamSugiContainer extends Component {
         }
     }
 
+    setUpdateSugi = async(seq, content) => {
+        const { Actions } = this.props
+        const params = {
+            Seq: seq,
+            s_CONTENT : content
+        }
+        console.log(params)
+        try{
+            const apiService = Actions.updateSugi(params)
+            const response = await apiService
+            if (!isUndefined(response) && !isUndefined(response.data)) {
+                const responseJson = response.data
+                console.log(responseJson)
+                const hasError = hasApiServiceError({
+                    errcode: responseJson.errCode,
+                    errmsg: responseJson.errMsg,
+                })
+                if (hasError.error) {
+                    alert("서버에서 오류가 발생되었습니다.");
+                } else {
+                    alert("수정되었습니다.");
+                    this.getTeamSugi();
+                } 
+            } else {
+                alert("데이터 처리에 문제가 발생하였습니다.");
+            }
+        }catch(ex){
+            throw Error(ex)
+        }
+    }
+
     getTeamSugi = async() => {
         const params = { uid: 'test'}
         const { Actions } = this.props
@@ -158,7 +195,7 @@ class TeamSugiContainer extends Component {
                         title:"",
                         content:""
                         }, () => {
-                        this.scrollToTop()
+                        // this.scrollToTop()
                     })
                 } 
             } else {
@@ -172,12 +209,13 @@ class TeamSugiContainer extends Component {
 
     render() {
         const {sugiList, name, univ, major, code_name, title, content} = this.state
-        const {deleteItem, saveItem, handleChange} = this
+        const {deleteItem, saveItem, handleChange, updateItem} = this
         return (
             <TeamSugi sugiList = {sugiList} 
                 deleteItem = {deleteItem} 
                 saveItem = {saveItem}
                 handleChange = {handleChange}
+                updateItem = {updateItem} 
                 name={name}
                 univ={univ}
                 major={major}

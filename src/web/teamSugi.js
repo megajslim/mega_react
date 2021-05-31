@@ -13,9 +13,15 @@ class TeamSugi extends Component {
         const { deleteItem } = this.props
         deleteItem(seq)
     }
+
+    handleUpdate=(seq, content) => {
+        const { updateItem } = this.props
+        updateItem(seq, content)
+    }
+
     renderList = () => {
         const { sugiList } = this.props
-        const {handleDelete,handleChange} = this
+        const {handleDelete, handleUpdate} = this
         if(sugiList){
             return(
                 <Fragment>
@@ -43,15 +49,14 @@ class TeamSugi extends Component {
                                             this.setState({ 
                                                 values
                                             });
-                                            console.log(values); 
                                         }}
-                                        
                                         style ={{ paddingLeft:'200px', width:'75%',fontSize:'16px', lineHeight:'29px', marginTop:'20px', wordBreak:'keep-all'}} />
+
                                         <p style={{textAlign:'right', marginRight:'10px'}}>
                                             <Button
                                                 variant="contained"
                                                 startIcon={<SvgIcon />}
-                                                onClick={handleDelete.bind(this, item.s_seq)}
+                                                onClick={handleUpdate.bind(this, item.s_seq, item.s_content)}
                                                 style={{marginRight:'10px'}}
                                             >
                                                 Edit
